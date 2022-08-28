@@ -18,7 +18,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <link href="assets/css/material-kit.css?v=3.0.0" rel="stylesheet" />
@@ -31,19 +32,14 @@
       <div class="row">
         <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
           <h3 class="text-center">Calculo do Salário Líquido e Benefícios</h3>
-          <h2>Resultado do seu calculo</h2>
-          <div>
-            <p>Contribuição INSS: {{inss}}</p>
-            <p>Imposto de Renda: {{irpf}}</p>
-            <p>Salário Líquido: {{liquid}}</p>
-          </div>
-          <form role="form" id="contact-form"  autocomplete="off">
+          <form role="form" id="contact-form" autocomplete="off">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="input-group input-group-dynamic mb-4">
                     <label class="form-label">Salário Bruto</label>
-                    <input class="form-control" aria-label="Informe o valor do seu Salário Bruto e Beneficios..." type="number" v-model="salary">
+                    <input class="form-control" aria-label="Informe o valor do seu Salário Bruto e Beneficios..."
+                      type="number" v-model="salary">
                   </div>
                 </div>
               </div>
@@ -56,11 +52,57 @@
           </form>
         </div>
       </div>
+      <div class="row" v-if="result">
+        <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+          <h5 class="font-weight-bolder mt-3 text-center">Resultado do seu calculo</h5>
+          <div>
+            <p>Contribuição INSS: <span class="text-primary">{{inss}}</span></p>
+            <p>Imposto de Renda: <span class="text-primary">{{irpf}}</span></p>
+            <p>Salário Líquido: <span class="text-success">{{liquid}}</span></p>
+          </div>
+        </div>
+        <div class="row" v-if="final">
+          <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+            <h5 class="font-weight-bolder mt-3 text-center">Salário Anual</h5>
+            <div>
+              <p>Anualmente você vai receber: <span class="text-success">{{final}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-if="fgts">
+        <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+          <h5 class="font-weight-bolder mt-3 text-center">FGTS</h5>
+          <div>
+            <p>Mensalmento você vai receber de FGTS: <span class="text-success">{{fgts}}</span></p>
+            <p>Em 12 meses você terá, por exemplo: <span class="text-success">{{fgts12}}</span></p>
+            <p>Em 24 meses você terá, por exemplo: <span class="text-success">{{fgts24}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-if="salary13">
+        <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+          <h5 class="font-weight-bolder mt-3 text-center">13º Salário</h5>
+          <div>
+            <p>Anualmente você vai receber de 13º: <span class="text-success">{{salary13}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-if="vacation">
+        <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+          <h5 class="font-weight-bolder mt-3 text-center">Férias</h5>
+          <div>
+            <p>A cada 12 meses, você vai receber <span class="text-success">{{vacation}}</span> e poderá descansar por 30 dias (corridos)</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <script src="../../assets/js/core/popper.min.js" type="text/javascript"></script>
   <script src="../../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <script src="https://demos.creative-tim.com/material-kit/assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
-    <script src="index.js"></script>
+  <script src="https://demos.creative-tim.com/material-kit/assets/js/material-kit.min.js?v=3.0.4"
+    type="text/javascript"></script>
+  <script src="index.js"></script>
 </body>
+
 </html>

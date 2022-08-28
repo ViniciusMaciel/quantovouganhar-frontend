@@ -1,5 +1,5 @@
 
-let vueData = { salary: '', inss: '', liquid: '', irpf: '' }
+let vueData = { salary: '', inss: '', liquid: '', irpf: '',result:false }
 let vueObj = {
     el: '#app',
     data: vueData
@@ -61,6 +61,30 @@ function calculate() {
 
         return result;
     }
+
+    function calcFGTS(salary){
+        return salary * 0.08;
+    }
+
+    function calcAbsolute(salary){
+        let _inss = calcINSS(salary);
+        let _irpf = calcIRPF(salary - _inss);
+        let _liquid = (salary - (_inss + _irpf));
+
+        return _liquid;
+    }
+
+    function calcFinal(salary, salary13, fgts, vacation){
+        return (salary * 12) + salary13 + fgts + vacation;
+    }
+
+    function calcVacation(salary){
+        let vacationSalary = salary + (salary / 3);
+        let vacation = calcAbsolute(vacationSalary);
+
+        return vacation;
+    }
+
     let _salary = myObject.salary;
 
     if (!isNaN(_salary)) {
@@ -71,9 +95,30 @@ function calculate() {
             _irpf = calcIRPF(_salary - _inss);
             _liquid = (_salary - (_inss + _irpf));
 
-            myObject.inss = "R$ " +_inss;
-            myObject.irpf = "R$ " +_irpf
-            myObject.liquid = "R$ " + _liquid;
+            myObject.inss = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_inss);
+            myObject.irpf = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_irpf);
+            myObject.liquid = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_liquid);
+            myObject.result = _liquid > 0;
+
+            _fgts = calcFGTS(_salary);
+            _fgts12 = _fgts * 12;
+            _fgts24 = _fgts * 24;
+
+            myObject.fgts = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_fgts);
+            myObject.fgts12 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_fgts12);
+            myObject.fgts24 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_fgts24);
+
+            _salary13 = calcAbsolute(_salary);
+
+            myObject.salary13 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_salary13);
+
+            _vacation = calcVacation(_salary);
+
+            myObject.vacation = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_vacation);
+
+            _final = calcFinal(_liquid, _salary13, _fgts12, _vacation);
+
+            myObject.final = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(_final);
 
         }
     }
