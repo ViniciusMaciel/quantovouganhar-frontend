@@ -95,8 +95,9 @@ total.forEach(function(i, e) {
     }) : total.forEach(function(e, t) {
         e.classList.contains("on-resize") && e.classList.remove("flex-column", "on-resize")
     })
-}), window.onload = function() {
-    for (var e = document.querySelectorAll("input"), t = 0; t < e.length; t++) e[t].addEventListener("focus", function(e) {
+// }), window.onload = function() {
+}), setTimeout(function() {
+    for (var e = document.querySelectorAll("input"), t = 0; t < e.length; t++) e[t].addEventListener("focus", function(e) {        
         this.parentElement.classList.add("is-focused")
     }, !1), e[t].onkeyup = function(e) {
         "" != this.value ? this.parentElement.classList.add("is-filled") : this.parentElement.classList.remove("is-filled")
@@ -110,5 +111,5 @@ total.forEach(function(i, e) {
             o.parentElement.removeChild(o)
         }, 600)
     }, !1)
-};
+},100)
 //# sourceMappingURL=_site_kit_free/assets/js/kit-free.js.map
